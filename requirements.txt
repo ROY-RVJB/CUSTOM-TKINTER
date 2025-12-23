@@ -1,0 +1,24 @@
+# ============================================
+# Monitor de Sistema v2 - ESP32
+# Dependencias del proyecto
+# ============================================
+
+# Interfaz gráfica moderna
+customtkinter>=5.2.0
+
+# Gráficas en tiempo real
+matplotlib>=3.7.0
+
+# Cálculos numéricos
+numpy>=1.24.0
+
+# Interpolación para líneas suaves
+scipy>=1.10.0
+
+# Comunicación serial con ESP32
+pyserial>=3.5
+
+# ============================================
+# Instalación rápida:
+# pip install -r requirements.txt
+# ============================================
