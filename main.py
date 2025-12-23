@@ -215,22 +215,20 @@ class InterfazSistema:
             text_color=Colores.TEXTO_TERCIARIO
         ).pack(anchor="w", pady=(0, Espaciado.PADDING_XS))
 
-        # ComboBox de puertos
-        self.puerto_combo = ctk.CTkComboBox(
+        # Entry para puerto serial
+        self.puerto_entry = ctk.CTkEntry(
             contenido,
-            values=[f"{Textos.PUERTO_DEFAULT} - Dispositivo A", "COM4 - Dispositivo B", "COM5 - Dispositivo C"],
             font=Fuentes.TEXTO_NORMAL,
             fg_color=Colores.FONDO_INPUT,
             border_color=Colores.BORDE_SUTIL,
-            button_color=Colores.FONDO_INPUT,
-            button_hover_color=Colores.BORDE_HOVER,
-            dropdown_fg_color=Colores.FONDO_PANEL,
-            dropdown_hover_color=Colores.FONDO_INPUT,
-            width=Dimensiones.COMBOBOX_WIDTH,
+            text_color=Colores.TEXTO_PRINCIPAL,
+            placeholder_text="Ej: COM3, COM4...",
+            placeholder_text_color=Colores.TEXTO_MUTED,
             height=Dimensiones.INPUT_HEIGHT,
             corner_radius=CORNER_RADIUS_SM
         )
-        self.puerto_combo.pack(fill="x", pady=(0, Espaciado.PADDING_MD))
+        self.puerto_entry.insert(0, Textos.PUERTO_DEFAULT)
+        self.puerto_entry.pack(fill="x", pady=(0, Espaciado.PADDING_MD))
 
         # Botones Start/Stop
         btn_frame = ctk.CTkFrame(contenido, fg_color="transparent")
@@ -630,7 +628,7 @@ class InterfazSistema:
     # ==================== MÉTODOS DE CONTROL ====================
     def _conectar_serial(self):
         """Conecta al puerto serial seleccionado."""
-        puerto = self.puerto_combo.get().split(" - ")[0]
+        puerto = self.puerto_entry.get().strip().upper()
         exito, mensaje = self.controlador.conectar_esp32(puerto)
 
         if exito:
